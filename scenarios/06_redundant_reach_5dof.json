@@ -1,0 +1,107 @@
+{
+  "name": "Redundant 5-DOF reach",
+  "description": "A 5-DOF arm reaches over a tall obstacle to the other side. Grid A* is refused (a 32-cell grid would need 32^5, about 33 million, cells), while RRT and RRT* work as in lower dimensions, though they need more iterations. This is why sampling-based planners dominate for real 6- and 7-DOF arms.",
+  "arm": {
+    "base": [
+      0,
+      0
+    ],
+    "link_radius": 0.018,
+    "joints": [
+      {
+        "length": 0.3,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.25,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.2,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.15,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.1,
+        "lower_deg": -170,
+        "upper_deg": 170
+      }
+    ]
+  },
+  "bounds": {
+    "min": [
+      -1.1,
+      -0.2
+    ],
+    "max": [
+      1.1,
+      1.1
+    ]
+  },
+  "obstacles": [
+    {
+      "type": "rectangle",
+      "min": [
+        -0.08,
+        0.36
+      ],
+      "max": [
+        0.08,
+        0.7
+      ]
+    },
+    {
+      "type": "circle",
+      "center": [
+        0.62,
+        0.78
+      ],
+      "radius": 0.08
+    },
+    {
+      "type": "circle",
+      "center": [
+        -0.62,
+        0.78
+      ],
+      "radius": 0.08
+    }
+  ],
+  "collision": {
+    "safety_margin": 0.005,
+    "self_collision": true
+  },
+  "start": {
+    "joints_deg": [
+      15,
+      15,
+      10,
+      5,
+      0
+    ]
+  },
+  "goal": {
+    "joints_deg": [
+      165,
+      -15,
+      -10,
+      -5,
+      0
+    ]
+  },
+  "planner": {
+    "step_size": 0.2,
+    "max_iterations": 30000,
+    "goal_bias": 0.1,
+    "goal_tolerance": 0.2,
+    "seed": 1,
+    "grid_resolution": 32
+  }
+}

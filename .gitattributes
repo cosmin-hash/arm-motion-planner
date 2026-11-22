@@ -1,0 +1,4 @@
+# Normalise line endings so clang-format checks and generated docs are identical on every OS.
+* text=auto eol=lf
+*.png binary
+*.gif binary

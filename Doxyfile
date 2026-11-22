@@ -1,0 +1,13 @@
+# Minimal Doxygen configuration: `doxygen` from the repository root writes HTML to build/doxygen.
+PROJECT_NAME           = "arm-motion-planner"
+PROJECT_BRIEF          = "Planar robot arm motion planning and control demo"
+OUTPUT_DIRECTORY       = build/doxygen
+INPUT                  = core/include core/src app README.md docs
+FILE_PATTERNS          = *.hpp *.cpp *.md
+RECURSIVE              = YES
+USE_MDFILE_AS_MAINPAGE = README.md
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = NO
+WARN_IF_UNDOCUMENTED   = YES
+GENERATE_LATEX         = NO
+HAVE_DOT               = NO

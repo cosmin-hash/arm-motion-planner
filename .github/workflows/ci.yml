@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  windows-msvc:
+    name: Windows / MSVC (core + tests)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Configure
+        run: cmake --preset windows-msvc -DAMP_BUILD_APP=OFF
+      - name: Build
+        run: cmake --build --preset windows-msvc --parallel
+      - name: Test
+        run: ctest --preset windows-msvc
+
+  ubuntu-gcc:
+    name: Ubuntu / GCC (core + tests + GUI)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build qt6-base-dev libgl1-mesa-dev python3
+      - name: Configure
+        run: cmake --preset linux
+      - name: Build
+        run: cmake --build --preset linux --parallel
+      - name: Test
+        run: ctest --preset linux
+
+  format:
+    name: clang-format check
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check formatting
+        run: |
+          find core app tests bench \( -name '*.cpp' -o -name '*.hpp' \) -print 2>/dev/null | xargs clang-format --dry-run --Werror

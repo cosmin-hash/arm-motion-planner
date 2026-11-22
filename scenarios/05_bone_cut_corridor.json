@@ -1,0 +1,92 @@
+{
+  "name": "Bone-cut corridor",
+  "description": "Loosely inspired by orthopaedic cutting: two blocks of 'bone' leave a narrow channel, and the tool tip must reach a target deep inside it. The goal is given as an end-effector position and resolved to joint angles by collision-aware inverse kinematics. The last two links must enter the corridor almost horizontally.",
+  "arm": {
+    "base": [
+      0,
+      0
+    ],
+    "link_radius": 0.015,
+    "joints": [
+      {
+        "length": 0.45,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.35,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.3,
+        "lower_deg": -170,
+        "upper_deg": 170
+      }
+    ]
+  },
+  "bounds": {
+    "min": [
+      -1.2,
+      -0.3
+    ],
+    "max": [
+      1.2,
+      1.2
+    ]
+  },
+  "obstacles": [
+    {
+      "type": "rectangle",
+      "min": [
+        0.45,
+        0.385
+      ],
+      "max": [
+        1.0,
+        0.65
+      ]
+    },
+    {
+      "type": "rectangle",
+      "min": [
+        0.45,
+        -0.2
+      ],
+      "max": [
+        1.0,
+        0.215
+      ]
+    }
+  ],
+  "collision": {
+    "safety_margin": 0.004,
+    "self_collision": true
+  },
+  "start": {
+    "joints_deg": [
+      100,
+      30,
+      20
+    ]
+  },
+  "goal": {
+    "end_effector": [
+      0.8,
+      0.3
+    ],
+    "ik_seed_deg": [
+      40,
+      -40,
+      -10
+    ]
+  },
+  "planner": {
+    "step_size": 0.1,
+    "max_iterations": 50000,
+    "goal_bias": 0.1,
+    "goal_tolerance": 0.1,
+    "seed": 1,
+    "grid_resolution": 64
+  }
+}

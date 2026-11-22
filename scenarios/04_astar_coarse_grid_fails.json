@@ -1,0 +1,77 @@
+{
+  "name": "A* fails: grid too coarse",
+  "description": "A 3-DOF version of the fold-under-the-wall problem. With 14 cells per joint (about 24 degrees per cell, coarser for the limited joints' share) the free channel is thinner than one grid cell, so A* reports that no path exists even though one does. RRT, which is not tied to a grid, finds it. A* is only resolution complete: refine the grid and it succeeds again, at a much higher cost.",
+  "arm": {
+    "base": [
+      0,
+      0
+    ],
+    "link_radius": 0.02,
+    "joints": [
+      {
+        "length": 0.45,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.35,
+        "lower_deg": -100,
+        "upper_deg": 100
+      },
+      {
+        "length": 0.2,
+        "lower_deg": -60,
+        "upper_deg": 60
+      }
+    ]
+  },
+  "bounds": {
+    "min": [
+      -1.1,
+      -0.15
+    ],
+    "max": [
+      1.1,
+      1.1
+    ]
+  },
+  "obstacles": [
+    {
+      "type": "rectangle",
+      "min": [
+        -0.03,
+        0.56
+      ],
+      "max": [
+        0.03,
+        1.05
+      ]
+    }
+  ],
+  "collision": {
+    "safety_margin": 0.005,
+    "self_collision": true
+  },
+  "start": {
+    "joints_deg": [
+      20,
+      20,
+      10
+    ]
+  },
+  "goal": {
+    "joints_deg": [
+      160,
+      -20,
+      -10
+    ]
+  },
+  "planner": {
+    "step_size": 0.1,
+    "max_iterations": 40000,
+    "goal_bias": 0.05,
+    "goal_tolerance": 0.1,
+    "seed": 1,
+    "grid_resolution": 14
+  }
+}

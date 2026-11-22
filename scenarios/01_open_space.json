@@ -1,0 +1,74 @@
+{
+  "name": "Open space",
+  "description": "A 3-DOF arm with a single small obstacle and no table. Every planner succeeds; use it to compare path quality: RRT returns a meandering first path, RRT* converges toward the shortest one, and A* is optimal on its grid.",
+  "arm": {
+    "base": [
+      0,
+      0
+    ],
+    "link_radius": 0.025,
+    "joints": [
+      {
+        "length": 0.4,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.35,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.25,
+        "lower_deg": -170,
+        "upper_deg": 170
+      }
+    ]
+  },
+  "bounds": {
+    "min": [
+      -1.2,
+      -1.2
+    ],
+    "max": [
+      1.2,
+      1.2
+    ]
+  },
+  "obstacles": [
+    {
+      "type": "circle",
+      "center": [
+        0.6,
+        -0.6
+      ],
+      "radius": 0.08
+    }
+  ],
+  "collision": {
+    "safety_margin": 0.005,
+    "self_collision": true
+  },
+  "start": {
+    "joints_deg": [
+      20,
+      30,
+      30
+    ]
+  },
+  "goal": {
+    "joints_deg": [
+      150,
+      -40,
+      -30
+    ]
+  },
+  "planner": {
+    "step_size": 0.15,
+    "max_iterations": 10000,
+    "goal_bias": 0.1,
+    "goal_tolerance": 0.15,
+    "seed": 1,
+    "grid_resolution": 32
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "name": "Cluttered field",
+  "description": "A 3-DOF arm among eight obstacles of mixed shapes above a table. The C-space is fragmented into many pockets; good for comparing how quickly each planner finds a path and how much RRT* improves it with more iterations.",
+  "arm": {
+    "base": [
+      0,
+      0
+    ],
+    "link_radius": 0.02,
+    "joints": [
+      {
+        "length": 0.4,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.35,
+        "lower_deg": -170,
+        "upper_deg": 170
+      },
+      {
+        "length": 0.25,
+        "lower_deg": -170,
+        "upper_deg": 170
+      }
+    ]
+  },
+  "bounds": {
+    "min": [
+      -1.15,
+      -0.25
+    ],
+    "max": [
+      1.15,
+      1.15
+    ]
+  },
+  "obstacles": [
+    {
+      "type": "circle",
+      "center": [
+        0.55,
+        0.55
+      ],
+      "radius": 0.07
+    },
+    {
+      "type": "circle",
+      "center": [
+        -0.55,
+        0.55
+      ],
+      "radius": 0.08
+    },
+    {
+      "type": "circle",
+      "center": [
+        0.0,
+        0.95
+      ],
+      "radius": 0.07
+    },
+    {
+      "type": "circle",
+      "center": [
+        0.85,
+        0.05
+      ],
+      "radius": 0.06
+    },
+    {
+      "type": "rectangle",
+      "min": [
+        -0.95,
+        0.05
+      ],
+      "max": [
+        -0.8,
+        0.25
+      ]
+    },
+    {
+      "type": "rectangle",
+      "min": [
+        0.25,
+        0.85
+      ],
+      "max": [
+        0.45,
+        0.95
+      ]
+    },
+    {
+      "type": "polygon",
+      "vertices": [
+        [
+          -0.35,
+          0.8
+        ],
+        [
+          -0.2,
+          0.8
+        ],
+        [
+          -0.28,
+          0.95
+        ]
+      ]
+    },
+    {
+      "type": "polygon",
+      "vertices": [
+        [
+          0.75,
+          0.4
+        ],
+        [
+          0.95,
+          0.45
+        ],
+        [
+          0.85,
+          0.6
+        ]
+      ]
+    }
+  ],
+  "collision": {
+    "safety_margin": 0.005,
+    "self_collision": true
+  },
+  "start": {
+    "joints_deg": [
+      -10,
+      40,
+      40
+    ]
+  },
+  "goal": {
+    "joints_deg": [
+      165,
+      -25,
+      30
+    ]
+  },
+  "planner": {
+    "step_size": 0.15,
+    "max_iterations": 15000,
+    "goal_bias": 0.05,
+    "goal_tolerance": 0.15,
+    "seed": 1,
+    "grid_resolution": 32
+  }
+}
