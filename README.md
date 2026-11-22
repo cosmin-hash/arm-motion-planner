@@ -240,7 +240,7 @@ tests/       GoogleTest suites, each test tagged with the requirement it verifie
 bench/       amp_bench: planner and nearest-neighbour benchmark, scenario diagnostics
 scenarios/   JSON planning problems
 tools/       check_traceability.py, capture_screenshots.ps1
-docs/        requirements, traceability, architecture, algorithms, walkthrough
+docs/        requirements, traceability, architecture, algorithms, walkthrough, roadmap
 ```
 
 ## Documentation
@@ -250,6 +250,7 @@ docs/        requirements, traceability, architecture, algorithms, walkthrough
 * [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): module diagram, data flow, threading model, design decisions
 * [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md): 42 numbered "shall" requirements
 * [docs/TRACEABILITY.md](docs/TRACEABILITY.md): requirement-to-test matrix (generated; CI fails on any gap)
+* [docs/ROADMAP.md](docs/ROADMAP.md): the path to a 3D cut-guide positioning robot, with work packages and proposed requirements
 
 API documentation: every public function has a Doxygen comment, and `doxygen` from the
 repository root writes HTML to `build/doxygen` (the Doxyfile is minimal; it was not run as
@@ -270,6 +271,32 @@ This is a teaching project, not a product. Known limitations:
 * A\* refuses more than 3 DOF by design.
 * Bit-identical determinism is per build. Different compilers can differ in the last bit of
   `sin` and `cos`, which a long random search can amplify.
+
+## Roadmap
+
+The next step is a 3D version modelled on collaborative orthopaedic robots for knee
+arthroplasty, where a 6-axis arm positions a cutting guide on each planned bone resection
+plane under optical tracking. The planners, the continuous-safety edge check, smoothing and
+timing carry over. The main additions:
+
+* **3D kinematics:** URDF/DH chain, 6xN Jacobian, closed-form and DLS inverse kinematics
+  on full 6D poses.
+* **Plane goals:** a cut plane fixes 3 of the guide's 6 DOF; the free 3 are chosen for reach,
+  manipulability, clearance and camera visibility.
+* **3D collision checking:** capsules and convex meshes, plus a camera line-of-sight
+  constraint.
+* **6D planning:** RRT-Connect, collision-free transit to a pre-approach pose, then a
+  straight Cartesian approach along the plane normal; constrained planning that keeps the
+  guide in its plane.
+* **Tracking and registration:** simulated optical tracker, pivot and hand-eye calibration,
+  paired-point and ICP registration with error reporting.
+* **Control:** coupled dynamics with inverse-dynamics feedforward, admittance hand-guiding,
+  and a hold mode that follows bone motion or stops on large motion or lost tracking.
+* **Safety logic:** pedal-enabled motion, a mode state machine, watchdogs and a hazard list.
+* **3D OpenGL view** with knee-specific readouts (varus/valgus, flexion, resection depth).
+
+See [docs/ROADMAP.md](docs/ROADMAP.md) for the gap analysis, work packages, proposed
+requirements, a demo scenario and effort estimates.
 
 ## License
 
