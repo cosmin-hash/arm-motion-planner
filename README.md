@@ -1,5 +1,14 @@
 # arm-motion-planner
 
+[![CI](https://github.com/cosmin-hash/arm-motion-planner/actions/workflows/ci.yml/badge.svg)](https://github.com/cosmin-hash/arm-motion-planner/actions/workflows/ci.yml)
+![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C?logo=cplusplus&logoColor=white)
+![Qt 6](https://img.shields.io/badge/Qt-6-41CD52?logo=qt&logoColor=white)
+![Eigen](https://img.shields.io/badge/Eigen-3.4-8A2BE2)
+![CMake](https://img.shields.io/badge/build-CMake%203.21%2B-064F8C?logo=cmake&logoColor=white)
+![tests](https://img.shields.io/badge/tests-GoogleTest-4285F4?logo=google&logoColor=white)
+![platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-555)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
 A planar robot arm **motion planning and control** demo in modern C++ (C++20), written without
 ROS, OMPL or MoveIt. The motion planning and control algorithms are implemented from scratch:
 
