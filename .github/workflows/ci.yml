@@ -9,12 +9,13 @@ jobs:
     name: Windows / MSVC (core + tests)
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      # windows-latest ships Visual Studio 2026; the preset targets VS 2022 for local builds.
       - name: Configure
-        run: cmake --preset windows-msvc -DAMP_BUILD_APP=OFF
+        run: cmake --preset windows-msvc -G "Visual Studio 18 2026" -DAMP_BUILD_APP=OFF
       - name: Build
         run: cmake --build --preset windows-msvc --parallel
       - name: Test
@@ -24,7 +25,7 @@ jobs:
     name: Ubuntu / GCC (core + tests + GUI)
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install dependencies
         run: |
           sudo apt-get update
@@ -40,7 +41,7 @@ jobs:
     name: clang-format check
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Check formatting
         run: |
           find core app tests bench \( -name '*.cpp' -o -name '*.hpp' \) -print 2>/dev/null | xargs clang-format --dry-run --Werror
